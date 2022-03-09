@@ -21,6 +21,8 @@ public struct PieData: Identifiable {
     var id = UUID()
     var value: Double
     var color: Color
+
+    public init() {}
 }
 
 public struct PieChartCell : View {
