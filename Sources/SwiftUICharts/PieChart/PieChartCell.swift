@@ -17,8 +17,7 @@ struct PieSlice: Identifiable {
     var normalizedValue: Double
 }
 
-public struct PieData: Identifiable {
-    var id = UUID()
+public struct PieData {
     var value: Double
     var color: Color
 
