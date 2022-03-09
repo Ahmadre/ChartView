@@ -21,7 +21,10 @@ public struct PieData {
     var value: Double
     var color: Color
 
-    public init() {}
+    public init(value: Double, color: Color) {
+        self.value = value
+        self.color = color
+    }
 }
 
 public struct PieChartCell : View {
