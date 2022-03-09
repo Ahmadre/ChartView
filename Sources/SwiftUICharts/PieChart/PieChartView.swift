@@ -10,11 +10,12 @@ import SwiftUI
 
 public struct PieChartView : View {
     public var data: [Double]
-    public var title: String
+    public var title: String?
     public var legend: String?
     public var style: ChartStyle
     public var formSize:CGSize
     public var dropShadow: Bool
+    public var showPreview: Bool
     public var valueSpecifier:String
     
     @State private var showValue = false
@@ -26,7 +27,7 @@ public struct PieChartView : View {
         }
     }
     
-    public init(data: [Double], title: String, legend: String? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, valueSpecifier: String? = "%.1f"){
+    public init(data: [Double], title: String? = nil, legend: String? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, showPreview: Bool? = true, valueSpecifier: String? = "%.1f"){
         self.data = data
         self.title = title
         self.legend = legend
@@ -36,6 +37,7 @@ public struct PieChartView : View {
             self.formSize = ChartForm.extraLarge
         }
         self.dropShadow = dropShadow!
+        self.showPreview = showPreview!
         self.valueSpecifier = valueSpecifier!
     }
     
@@ -48,18 +50,23 @@ public struct PieChartView : View {
             VStack(alignment: .leading){
                 HStack{
                     if(!showValue){
-                        Text(self.title)
-                            .font(.headline)
-                            .foregroundColor(self.style.textColor)
+                        if (self.title != nil) {
+                            Text(self.title)
+                                .font(.headline)
+                                .foregroundColor(self.style.textColor)
+                        }                        
                     }else{
                         Text("\(self.currentValue, specifier: self.valueSpecifier)")
                             .font(.headline)
                             .foregroundColor(self.style.textColor)
                     }
-                    Spacer()
-                    Image(systemName: "chart.pie.fill")
-                        .imageScale(.large)
-                        .foregroundColor(self.style.legendTextColor)
+                    if (showPreview) {
+                        Spacer()
+                        Image(systemName: "chart.pie.fill")
+                            .imageScale(.large)
+                            .foregroundColor(self.style.legendTextColor)
+                    }
+                    
                 }.padding()
                 PieChartRow(data: data, backgroundColor: self.style.backgroundColor, accentColor: self.style.accentColor, showValue: $showValue, currentValue: $currentValue)
                     .foregroundColor(self.style.accentColor).padding(self.legend != nil ? 0 : 12).offset(y:self.legend != nil ? 0 : -10)
