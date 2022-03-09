@@ -17,6 +17,7 @@ public struct PieChartView : View {
     public var dropShadow: Bool
     public var showPreview: Bool
     public var valueSpecifier:String
+    public var padding: Double
     
     @State private var showValue = false
     @State private var currentValue: Double = 0 {
@@ -27,7 +28,7 @@ public struct PieChartView : View {
         }
     }
     
-    public init(data: [Double], title: String? = nil, legend: String? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, showPreview: Bool? = true, valueSpecifier: String? = "%.1f"){
+    public init(data: [Double], title: String? = nil, legend: String? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, showPreview: Bool? = true, valueSpecifier: String? = "%.1f", padding: Double? = 12){
         self.data = data
         self.title = title
         self.legend = legend
@@ -39,6 +40,7 @@ public struct PieChartView : View {
         self.dropShadow = dropShadow!
         self.showPreview = showPreview!
         self.valueSpecifier = valueSpecifier!
+        self.padding = padding!
     }
     
     public var body: some View {
@@ -69,7 +71,7 @@ public struct PieChartView : View {
                     
                 }.padding()
                 PieChartRow(data: data, backgroundColor: self.style.backgroundColor, accentColor: self.style.accentColor, showValue: $showValue, currentValue: $currentValue)
-                    .foregroundColor(self.style.accentColor).padding(self.legend != nil ? 0 : 12).offset(y:self.legend != nil ? 0 : -10)
+                    .foregroundColor(self.style.accentColor).padding(self.legend != nil ? 0 : self.padding).offset(y:self.legend != nil ? 0 : -10)
                 if(self.legend != nil) {
                     Text(self.legend!)
                         .font(.headline)
