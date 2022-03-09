@@ -9,7 +9,7 @@
 import SwiftUI
 
 public struct PieChartView : View {
-    public var data: [Double]
+    public var data: [PieData]
     public var title: String?
     public var legend: String?
     public var style: ChartStyle
@@ -28,7 +28,7 @@ public struct PieChartView : View {
         }
     }
     
-    public init(data: [Double], title: String? = nil, legend: String? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, showPreview: Bool? = true, valueSpecifier: String? = "%.1f", padding: Double? = 12){
+    public init(data: [PieData], title: String? = nil, legend: String? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, showPreview: Bool? = true, valueSpecifier: String? = "%.1f", padding: Double? = 12){
         self.data = data
         self.title = title
         self.legend = legend
@@ -87,7 +87,13 @@ public struct PieChartView : View {
 #if DEBUG
 struct PieChartView_Previews : PreviewProvider {
     static var previews: some View {
-        PieChartView(data:[56,78,53,65,54], title: "Title", legend: "Legend")
+        PieChartView(data: [
+            PieData(value: 56, color: Color.teal),
+            PieData(value: 78, color: Color.blue),
+            PieData(value: 53, color: Color.red),
+            PieData(value: 65, color: Color.green),
+            PieData(value: 54, color: Color.yellow),
+        ], title: "Title", legend: "Legend")
     }
 }
 #endif

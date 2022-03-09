@@ -9,19 +9,21 @@
 import SwiftUI
 
 public struct PieChartRow : View {
-    var data: [Double]
+    var data: [PieData]
     var backgroundColor: Color
     var accentColor: Color
     var slices: [PieSlice] {
-        var tempSlices:[PieSlice] = []
-        var lastEndDeg:Double = 0
-        let maxValue = data.reduce(0, +)
+        var tempSlices: [PieSlice] = []
+        var lastEndDeg: Double = 0
+        let maxValue: Double {
+            return data.map { $0.value }.reduce(0, +)
+        }
         for slice in data {
-            let normalized:Double = Double(slice)/Double(maxValue)
+            let normalized:Double = Double(slice.value)/Double(maxValue)
             let startDeg = lastEndDeg
             let endDeg = lastEndDeg + (normalized * 360)
             lastEndDeg = endDeg
-            tempSlices.append(PieSlice(startDeg: startDeg, endDeg: endDeg, value: slice, normalizedValue: normalized))
+            tempSlices.append(PieSlice(startDeg: startDeg, endDeg: endDeg, value: slice.value, color: slice.color, normalizedValue: normalized))
         }
         return tempSlices
     }

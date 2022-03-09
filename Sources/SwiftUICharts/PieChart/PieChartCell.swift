@@ -17,6 +17,12 @@ struct PieSlice: Identifiable {
     var normalizedValue: Double
 }
 
+struct PieData: Identifiable {
+    var id = UUID()
+    var value: Double
+    var color: Color
+}
+
 public struct PieChartCell : View {
     @State private var show:Bool = false
     var rect: CGRect
