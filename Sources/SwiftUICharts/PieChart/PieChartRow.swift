@@ -15,7 +15,7 @@ public struct PieChartRow : View {
     var slices: [PieSlice] {
         var tempSlices: [PieSlice] = []
         var lastEndDeg: Double = 0
-        let maxValue: Double {
+        var maxValue: Double {
             return data.map { $0.value }.reduce(0, +)
         }
         for slice in data {
@@ -71,9 +71,21 @@ public struct PieChartRow : View {
 struct PieChartRow_Previews : PreviewProvider {
     static var previews: some View {
         Group {
-            PieChartRow(data:[8,23,54,32,12,37,7,23,43], backgroundColor: Color(red: 252.0/255.0, green: 236.0/255.0, blue: 234.0/255.0), accentColor: Color(red: 225.0/255.0, green: 97.0/255.0, blue: 76.0/255.0), showValue: Binding.constant(false), currentValue: Binding.constant(0))
+            PieChartRow(data:[
+                PieData(value: 56, color: Color.black),
+                PieData(value: 78, color: Color.blue),
+                PieData(value: 53, color: Color.red),
+                PieData(value: 65, color: Color.green),
+                PieData(value: 54, color: Color.yellow),
+                PieData(value: 78, color: Color.blue),
+                PieData(value: 53, color: Color.red),
+                PieData(value: 65, color: Color.green),
+                PieData(value: 54, color: Color.yellow),
+            ], backgroundColor: Color(red: 252.0/255.0, green: 236.0/255.0, blue: 234.0/255.0), accentColor: Color(red: 225.0/255.0, green: 97.0/255.0, blue: 76.0/255.0), showValue: Binding.constant(false), currentValue: Binding.constant(0))
                 .frame(width: 100, height: 100)
-            PieChartRow(data:[0], backgroundColor: Color(red: 252.0/255.0, green: 236.0/255.0, blue: 234.0/255.0), accentColor: Color(red: 225.0/255.0, green: 97.0/255.0, blue: 76.0/255.0), showValue: Binding.constant(false), currentValue: Binding.constant(0))
+            PieChartRow(data:[
+                PieData(value: 0, color: Color.black),
+            ], backgroundColor: Color(red: 252.0/255.0, green: 236.0/255.0, blue: 234.0/255.0), accentColor: Color(red: 225.0/255.0, green: 97.0/255.0, blue: 76.0/255.0), showValue: Binding.constant(false), currentValue: Binding.constant(0))
                 .frame(width: 100, height: 100)
         }
     }
