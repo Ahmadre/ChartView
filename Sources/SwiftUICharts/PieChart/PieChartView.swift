@@ -51,7 +51,7 @@ public struct PieChartView : View {
                 HStack{
                     if(!showValue){
                         if (self.title != nil) {
-                            Text(self.title)
+                            Text(self.title!)
                                 .font(.headline)
                                 .foregroundColor(self.style.textColor)
                         }                        
