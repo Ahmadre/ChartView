@@ -88,7 +88,7 @@ public struct PieChartView : View {
 struct PieChartView_Previews : PreviewProvider {
     static var previews: some View {
         PieChartView(data: [
-            PieData(value: 56, color: Color.teal),
+            PieData(value: 56, color: Color.black),
             PieData(value: 78, color: Color.blue),
             PieData(value: 53, color: Color.red),
             PieData(value: 65, color: Color.green),
